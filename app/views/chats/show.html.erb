@@ -1,0 +1,17 @@
+<div data-controller="chat" data-chat-channel-uuid="<%= @chat.id %>" id="chat">
+  <p style="color: green"><%= notice %></p>
+
+  <h1>Messages</h1>
+
+  <%= form_with model: @chat, data: { action: "chat#speak"}, remote: true do |form| %>
+    <%= form.text_area :body, placeholder: "Your message here", data: { 'chat-target': "message" } %>
+    <br>
+    <%= form.submit %>
+  <% end %>
+
+  <ul data-chat-target="add">
+    <% @chat.messages.each do |message| %>
+      <li><%= message.content %></li>
+    <% end %>
+  </ul>
+</div>
